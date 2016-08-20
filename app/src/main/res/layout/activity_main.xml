@@ -8,13 +8,12 @@
     tools:context="moe.minori.openxiaomiscale.MainActivity">
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="Scale: "
+              android:text="@string/scaleNameLableString"
               android:id="@+id/textView4"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="(Scale name)"
         android:id="@+id/scaleNameText"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/textView4"/>
@@ -22,7 +21,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="(Scale status)"
         android:id="@+id/scaleStatusText"
         android:layout_below="@+id/textView4"
         android:layout_alignParentStart="true"/>
@@ -38,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="(Unit)"
+            android:text="@string/measurementUnitPlaceholderString"
             android:id="@+id/measurementUnitText"
             android:textSize="40sp"
             android:layout_alignBottom="@+id/scaleWeightText"
@@ -74,7 +72,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Scan start"
+        android:text="@string/scanStartButtonString"
         android:id="@+id/scanStartButton"
         android:layout_below="@+id/scaleStatusText"
         android:layout_centerHorizontal="true"

@@ -14,4 +14,7 @@
     <string name="scaleNotFoundString">(Scale not found)</string>
     <string name="scaleNotFoundStatusString">Could not find scale. Check scale battery and reception, and launch again</string>
     <string name="scaleFoundStatusString">Scale found, go ahead.</string>
+    <string name="scanStartButtonString">Scan start</string>
+    <string name="scaleNameLableString">Scale: </string>
+    <string name="measurementUnitPlaceholderString">(Unit)</string>
 </resources>
