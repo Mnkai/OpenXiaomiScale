@@ -39,8 +39,6 @@ public class BTUtils
 	private static BluetoothAdapter.LeScanCallback scanCallback = null;
 	private static BluetoothGattCallback gattCallback = null;
 
-	private static final long SCAN_PERIOD = 10000;
-
 	private static void prepareBLECallback(final Activity activity)
 	{
 		// Prepare callback
@@ -366,7 +364,7 @@ public class BTUtils
 				@Override
 				public void run()
 				{
-					Log.d("StartStopBLEScanning", "Scan expired because of time : " + SCAN_PERIOD);
+					Log.d("StartStopBLEScanning", "Scan expired because of time");
 					bluetoothAdapter.stopLeScan(scanCallback);
 
 					activity.runOnUiThread(new Runnable()
@@ -386,7 +384,7 @@ public class BTUtils
 					});
 
 				}
-			}, SCAN_PERIOD);
+			}, Long.parseLong(PreferenceManager.getDefaultSharedPreferences(activity).getString("settingsScanMaxDuration", "10000")));
 
 			bluetoothAdapter.startLeScan(scanCallback);
 
