@@ -8,6 +8,8 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends Activity
@@ -73,5 +75,24 @@ public class MainActivity extends Activity
 		super.onDestroy();
 		Utils.startStopBLEScanning(this, false);
 		Utils.stopGatt();
+	}
+
+	public void onClick (View v)
+	{
+		if ( v.getId() == R.id.scanStartButton )
+		{
+			Log.d("MainActivity", "Starting scan...");
+
+			TextView scaleNameTextView = (TextView) findViewById(R.id.scaleNameText);
+			scaleNameTextView.setText("(Searching...)");
+
+			TextView scaleStatusTextView = (TextView) findViewById(R.id.scaleStatusText);
+			scaleStatusTextView.setText("If not found, step up.");
+
+			Utils.startStopBLEScanning(this, true);
+
+			Button scanStartButton = (Button) findViewById(R.id.scanStartButton);
+			scanStartButton.setVisibility(View.GONE);
+		}
 	}
 }

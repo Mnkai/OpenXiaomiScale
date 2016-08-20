@@ -13,6 +13,8 @@ import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -54,19 +56,6 @@ public class Utils
 						startGatt(device, activity);
 						startStopBLEScanning(activity, false);
 
-						activity.runOnUiThread(new Runnable()
-						{
-							@Override
-							public void run()
-							{
-								TextView scaleNameTextView = (TextView) activity.findViewById(R.id.scaleNameText);
-								scaleNameTextView.setText(device.getName() + "(" + device.getAddress() + ")");
-
-								TextView scaleStatusTextView = (TextView) activity.findViewById(R.id.scaleStatusText);
-								scaleStatusTextView.setText("Scale found");
-							}
-						});
-
 						// Register GATT listener to receive weight event from scale device
 						Log.d("MainActivity", "Scale found, starting Gatt connection");
 					}
@@ -89,7 +78,7 @@ public class Utils
 		gattCallback = new BluetoothGattCallback()
 		{
 			@Override
-			public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState)
+			public void onConnectionStateChange(final BluetoothGatt gatt, int status, int newState)
 			{
 				super.onConnectionStateChange(gatt, status, newState);
 				Log.d("GattCallback", "onConnectionStateChange");
@@ -101,11 +90,30 @@ public class Utils
 				else if (newState == BluetoothProfile.STATE_DISCONNECTED)
 				{
 					Log.d("GattCallback", "Gatt disconnected");
+
+					activity.runOnUiThread(new Runnable()
+					{
+						@Override
+						public void run()
+						{
+							TextView scaleNameTextView = (TextView) activity.findViewById(R.id.scaleNameText);
+							scaleNameTextView.setText("(Disconnected)");
+
+							TextView scaleStatusTextView = (TextView) activity.findViewById(R.id.scaleStatusText);
+							scaleStatusTextView.setText("Disconnected due to range, idle, etc.");
+
+							Button scanStartButton = (Button) activity.findViewById(R.id.scanStartButton);
+							scanStartButton.setVisibility(View.VISIBLE);
+						}
+					});
+
+					stopGatt();
+					startStopBLEScanning(activity, false);
 				}
 			}
 
 			@Override
-			public void onServicesDiscovered(BluetoothGatt gatt, int status)
+			public void onServicesDiscovered(final BluetoothGatt gatt, int status)
 			{
 				super.onServicesDiscovered(gatt, status);
 				Log.d("GattCallback", "onServicesDiscovered");
@@ -121,6 +129,20 @@ public class Utils
 							if (two.getUuid().toString().startsWith("00002a9d"))
 							{
 								// Weight param discovered
+
+								activity.runOnUiThread(new Runnable()
+								{
+									@Override
+									public void run()
+									{
+										TextView scaleNameTextView = (TextView) activity.findViewById(R.id.scaleNameText);
+										scaleNameTextView.setText(gatt.getDevice().getName() + "(" + gatt.getDevice().getAddress() + ")");
+
+										TextView scaleStatusTextView = (TextView) activity.findViewById(R.id.scaleStatusText);
+										scaleStatusTextView.setText("Scale found, go ahead.");
+									}
+								});
+
 								weightCharacteristic = two;
 
 								// Start constant notification
@@ -315,6 +337,9 @@ public class Utils
 
 							TextView scaleStatusTextView = (TextView) activity.findViewById(R.id.scaleStatusText);
 							scaleStatusTextView.setText("Could not find scale. Check scale battery and reception, and launch again");
+
+							Button scanStartButton = (Button) activity.findViewById(R.id.scanStartButton);
+							scanStartButton.setVisibility(View.VISIBLE);
 						}
 					});
 

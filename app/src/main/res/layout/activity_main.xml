@@ -58,7 +58,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="(Stabilization Status)"
             android:id="@+id/scaleStabilizationText"
             android:layout_below="@+id/measurementUnitText"
             android:layout_centerHorizontal="true"/>
@@ -66,10 +65,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="(Weight unload Status)"
             android:id="@+id/unloadWeightText"
             android:layout_below="@+id/scaleStabilizationText"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            />
     </RelativeLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scan start"
+        android:id="@+id/scanStartButton"
+        android:layout_below="@+id/scaleStatusText"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClick"
+        android:visibility="gone"/>
 
 </RelativeLayout>
