@@ -12,17 +12,22 @@ import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import moe.minori.openxiaomiscale.objects.BMI;
+import moe.minori.openxiaomiscale.objects.Weight;
+
 /**
  * Created by minori on 16. 8. 20.
  */
-public class Utils
+public class BTUtils
 {
 	private static BluetoothAdapter bluetoothAdapter = null;
 	private static Handler mHandler = null;
@@ -258,6 +263,9 @@ public class Utils
 						TextView stabilizedTextView = (TextView) activity.findViewById(R.id.scaleStabilizationText);
 						TextView unloadWeightTextView = (TextView) activity.findViewById(R.id.unloadWeightText);
 
+						TextView bmiValueTextView = (TextView) activity.findViewById(R.id.bmiValueText);
+						TextView bmiInformationTextView = (TextView) activity.findViewById(R.id.bmiInformationText);
+
 						weightTextView.setText(weight.weight() + "");
 
 						if ( weight.getMeasureSystem() == Weight.CATTY )
@@ -277,6 +285,40 @@ public class Utils
 						else
 							unloadWeightTextView.setText("");
 
+						SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(activity);
+
+						float bmi = new BMI(
+								Float.parseFloat(preference.getString("settingsHeight", "100")),
+								preference.getBoolean("settingsBMIImperial", false),
+								weight.weight(),
+								weight.getMeasureSystem()).getBMI();
+
+						bmiValueTextView.setText(bmi + "");
+
+						if ( bmi < 18.5 )
+						{
+							bmiInformationTextView.setText("Underweight");
+						}
+						else if ( bmi < 25 )
+						{
+							bmiInformationTextView.setText("Normal weight");
+
+						}
+						else if ( bmi < 30)
+						{
+							bmiInformationTextView.setText("Overweight");
+
+						}
+						else if ( bmi < 40 )
+						{
+							bmiInformationTextView.setText("Obese");
+
+						}
+						else
+						{
+							bmiInformationTextView.setText("Extremely Obese");
+
+						}
 					}
 				});
 

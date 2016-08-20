@@ -5,15 +5,40 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends Activity
 {
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		getMenuInflater().inflate(R.menu.menu_main, menu);
+
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+
+		if ( item.getItemId() == R.id.menu_settings)
+		{
+			startActivity(new Intent(this, SettingsActivity.class));
+		}
+
+		return super.onOptionsItemSelected(item);
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -44,7 +69,38 @@ public class MainActivity extends Activity
 		scaleStatusTextView.setText(R.string.scaleSearchingStatusString);
 
 		Log.d("MainActivity", "Starting scan...");
-		Utils.startStopBLEScanning(this, true);
+		BTUtils.startStopBLEScanning(this, true);
+
+		// BMI layout
+		SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(this);
+
+		boolean isBmiEnabled = preference.getBoolean("settingsBMICalculation", false);
+
+		TextView bmiLabelTextView = (TextView) findViewById(R.id.bmiLabelText);
+		TextView bmiValueTextView = (TextView) findViewById(R.id.bmiValueText);
+		TextView bmiInformationTextView = (TextView) findViewById(R.id.bmiInformationText);
+
+
+		if ( isBmiEnabled )
+		{
+			bmiValueTextView.setText("");
+			bmiInformationTextView.setText("");
+
+			bmiLabelTextView.setVisibility(View.VISIBLE);
+			bmiValueTextView.setVisibility(View.VISIBLE);
+			bmiInformationTextView.setVisibility(View.VISIBLE);
+		}
+		else
+		{
+			bmiValueTextView.setText("");
+			bmiInformationTextView.setText("");
+
+			bmiLabelTextView.setVisibility(View.GONE);
+			bmiValueTextView.setVisibility(View.GONE);
+			bmiInformationTextView.setVisibility(View.GONE);
+		}
+
+
 
 	}
 
@@ -69,12 +125,13 @@ public class MainActivity extends Activity
 		builder.show();
 	}
 
+
 	@Override
-	protected void onDestroy()
+	protected void onPause()
 	{
-		super.onDestroy();
-		Utils.startStopBLEScanning(this, false);
-		Utils.stopGatt();
+		super.onPause();
+		BTUtils.startStopBLEScanning(this, false);
+		BTUtils.stopGatt();
 	}
 
 	public void onClick (View v)
@@ -90,7 +147,7 @@ public class MainActivity extends Activity
 			scaleStatusTextView.setText(R.string.scaleSearchingStatusString);
 
 
-			Utils.startStopBLEScanning(this, true);
+			BTUtils.startStopBLEScanning(this, true);
 
 			Button scanStartButton = (Button) findViewById(R.id.scanStartButton);
 			scanStartButton.setVisibility(View.GONE);

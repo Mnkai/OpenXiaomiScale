@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">OpenXiaomiScale</string>
+    <string name="locationPermissionRequiredMessageString">안드로이드 M부터 블루투스 LE 장치 스캔을 위해 위치 권한이 필요합니다. </string>
+    <string name="locationPermissionRequiredString">권한 필요</string>
+    <string name="measurementUnitCattyString">중국 근</string>
+    <string name="measurementUnitKgString">킬로그램</string>
+    <string name="measurementUnitLbsString">파운드</string>
+    <string name="scaleDisconnectedString">(연결 끊어짐)</string>
+    <string name="scaleFoundStatusString">저울 찾음, 계속 진행하세요.</string>
+    <string name="scaleNotFoundStatusString">저울을 찾을 수 없었습니다. 저울의 배터리와 수신 상태를 점검한 후, 다시 실행해주세요.</string>
+    <string name="scaleNotFoundString">(저울을 찾을 수 없음)</string>
+    <string name="scaleSearchingStatusString">저울을 찾을 수 없다면, 저울에 올라서보세요.</string>
+    <string name="scaleSearchingString">(검색중)</string>
+    <string name="stabilizedString">무게 안정화됨</string>
+    <string name="stringDisconnectedStatusString">거리, 사용 안함 등으로 인해 연결 끊어짐</string>
+    <string name="weightRemovedString">저울에서 내려옴</string>
+    <string name="measurementUnitPlaceholderString">(단위)</string>
+    <string name="scaleNameLableString">저울: </string>
+    <string name="scanStartButtonString">검색 시작</string>
+</resources>

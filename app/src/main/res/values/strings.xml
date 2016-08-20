@@ -17,4 +17,5 @@
     <string name="scanStartButtonString">Scan start</string>
     <string name="scaleNameLableString">Scale: </string>
     <string name="measurementUnitPlaceholderString">(Unit)</string>
+
 </resources>

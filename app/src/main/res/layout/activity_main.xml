@@ -79,4 +79,35 @@
         android:onClick="onClick"
         android:visibility="gone"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="BMI"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/bmiLabelText"
+        android:paddingTop="10dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="(BMI)"
+        android:id="@+id/bmiValueText"
+        android:visibility="gone"
+        android:layout_below="@+id/bmiLabelText"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="(BMI Information)"
+        android:id="@+id/bmiInformationText"
+        android:layout_below="@+id/bmiValueText"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"/>
+
 </RelativeLayout>

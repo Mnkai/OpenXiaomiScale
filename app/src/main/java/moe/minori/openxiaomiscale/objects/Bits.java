@@ -1,4 +1,4 @@
-package moe.minori.openxiaomiscale;
+package moe.minori.openxiaomiscale.objects;
 
 /**
  * Parses int (32bit) into 8 items of boolean

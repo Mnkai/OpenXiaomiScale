@@ -1,4 +1,4 @@
-package moe.minori.openxiaomiscale;
+package moe.minori.openxiaomiscale.objects;
 
 /**
  * Created by minori on 16. 8. 20.

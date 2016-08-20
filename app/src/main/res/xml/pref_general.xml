@@ -1,0 +1,60 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:id="@+id/settingsBMICalculation"
+        android:key="settingsBMICalculation"
+        android:summary="Calculates BMI data based on your personal information below"
+        android:title="BMI"/>
+
+    <PreferenceCategory
+        android:title="Personal Information"
+        android:dependency="settingsBMICalculation">
+
+        <SwitchPreference
+            android:key="settingsBMIImperial"
+            android:title="Imperial Unit"
+            android:defaultValue="false"
+            android:summary="Centimeter / feet unit for height data"
+            android:dependency="settingsBMICalculation"/>
+
+        <EditTextPreference
+            android:key="settingsHeight"
+            android:defaultValue="100.0"
+            android:inputType="numberDecimal"
+            android:summary="Actual height data"
+            android:title="Height"
+            android:dependency="settingsBMICalculation" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Advanced (Normally, you don't have to change this)">
+
+        <EditTextPreference
+            android:defaultValue="10000"
+            android:id="@+id/settingsScanMaxDuration"
+            android:title="Maximum scan duration"
+            android:summary="Configures maximum scan duration.\nHigher the number, longer it will try to search scale.\n(Default: 10000 miliseconds)"
+            android:inputType="numberDecimal" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Information">
+
+        <Preference
+            android:title="License"
+            android:summary="Apache License 2.0" />
+
+        <Preference
+            android:title="Bug report and source"
+            android:summary="Press here to launch web browser" />
+
+    </PreferenceCategory>
+
+
+
+</PreferenceScreen>
