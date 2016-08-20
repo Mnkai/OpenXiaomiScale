@@ -8,5 +8,68 @@
     tools:context="moe.minori.openxiaomiscale.MainActivity">
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:text="Hello World!" />
+              android:text="Scale: "
+              android:id="@+id/textView4"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(Scale name)"
+        android:id="@+id/scaleNameText"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/textView4"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(Scale status)"
+        android:id="@+id/scaleStatusText"
+        android:layout_below="@+id/textView4"
+        android:layout_alignParentStart="true"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/relativeLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="(Unit)"
+            android:id="@+id/measurementUnitText"
+            android:textSize="40sp"
+            android:layout_alignBottom="@+id/scaleWeightText"
+            android:layout_toEndOf="@+id/scaleWeightText"
+            android:paddingLeft="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="00.0"
+            android:id="@+id/scaleWeightText"
+            android:textSize="80sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(Stabilization Status)"
+            android:id="@+id/scaleStabilizationText"
+            android:layout_below="@+id/measurementUnitText"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(Weight unload Status)"
+            android:id="@+id/unloadWeightText"
+            android:layout_below="@+id/scaleStabilizationText"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
 </RelativeLayout>

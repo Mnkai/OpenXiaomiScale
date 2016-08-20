@@ -8,9 +8,9 @@ public class Weight
 	byte[] data;
 	Bits firstBit;
 
-	public final int CATTY = 0;
-	public final int LBS = 1;
-	public final int KG = 2;
+	public static final int CATTY = 0;
+	public static final int LBS = 1;
+	public static final int KG = 2;
 
 	public Weight(byte[] raw)
 	{

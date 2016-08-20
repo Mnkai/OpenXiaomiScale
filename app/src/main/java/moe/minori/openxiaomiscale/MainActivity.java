@@ -5,11 +5,10 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.TextView;
 
 public class MainActivity extends Activity
 {
@@ -36,25 +35,15 @@ public class MainActivity extends Activity
 				return;
 			}
 		}
+		TextView scaleNameTextView = (TextView) findViewById(R.id.scaleNameText);
+		scaleNameTextView.setText("(Searching...)");
 
-		// When activity is resumed, check for SharedPref for previous scale mac
-		SharedPreferences sharedPreferences = getSharedPreferences("default", MODE_PRIVATE);
-		String scaleMac = sharedPreferences.getString("scaleMac", null);
+		TextView scaleStatusTextView = (TextView) findViewById(R.id.scaleStatusText);
+		scaleStatusTextView.setText("If not found, step up.");
 
-		if (scaleMac == null) // Scale is not registered
-		{
-			Log.d("MainActivity", "Scale is not registered");
-			Intent intent = new Intent(this, ScaleRegisterActivity.class);
-			startActivity(intent);
+		Log.d("MainActivity", "Starting scan...");
+		Utils.startStopBLEScanning(this, true);
 
-		}
-		else
-		{
-			// Register GATT listener to receive weight event from scale device
-			Log.d("MainActivity", "Scale registered, start BLE scanning for GATT connection");
-
-			Utils.startStopBLEScanning(this, true);
-		}
 	}
 
 
@@ -76,5 +65,13 @@ public class MainActivity extends Activity
 
 		});
 		builder.show();
+	}
+
+	@Override
+	protected void onDestroy()
+	{
+		super.onDestroy();
+		Utils.startStopBLEScanning(this, false);
+		Utils.stopGatt();
 	}
 }

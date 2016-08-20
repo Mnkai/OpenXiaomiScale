@@ -12,8 +12,8 @@ import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Handler;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -23,7 +23,6 @@ import java.util.ArrayList;
 public class Utils
 {
 	private static BluetoothAdapter bluetoothAdapter = null;
-	private static boolean mScanning;
 	private static Handler mHandler = null;
 
 	private static BluetoothGatt bluetoothGatt;
@@ -50,34 +49,26 @@ public class Utils
 					if (device.getName().equals("MI_SCALE")) // It really is scale
 					{
 						// Register device in the shared preference
-						//TODO: Deal with multiple scale
+						//TODO: Deal with multiple scale, maybe signal strength threshold?
 
-						SharedPreferences sharedPreferences = activity.getSharedPreferences("default", activity.MODE_PRIVATE);
+						startGatt(device, activity);
+						startStopBLEScanning(activity, false);
 
-						if (sharedPreferences.getString("scaleMac", null) == null) // Dealing with no scaleMac set situation
+						activity.runOnUiThread(new Runnable()
 						{
-							SharedPreferences.Editor editor = sharedPreferences.edit();
-							editor.putString("scaleMac", device.getAddress());
-							editor.commit();
+							@Override
+							public void run()
+							{
+								TextView scaleNameTextView = (TextView) activity.findViewById(R.id.scaleNameText);
+								scaleNameTextView.setText(device.getName() + "(" + device.getAddress() + ")");
 
-							// Saved, finish activity and return to MainActivity
-							startStopBLEScanning(activity, false);
-							activity.finish();
-						}
-						else
-						{
-							// Looking for GATT characteristics
-							//noinspection ConstantConditions
-							if (sharedPreferences.getString("scaleMac", null).equals(device.getAddress())) // If device matches current set device
-							{
-								startGatt(device, activity);
-								startStopBLEScanning(activity, false);
+								TextView scaleStatusTextView = (TextView) activity.findViewById(R.id.scaleStatusText);
+								scaleStatusTextView.setText("Scale found");
 							}
-							else
-							{
-								// Do nothing, wait for another device
-							}
-						}
+						});
+
+						// Register GATT listener to receive weight event from scale device
+						Log.d("MainActivity", "Scale found, starting Gatt connection");
 					}
 				}
 			}
@@ -229,11 +220,44 @@ public class Utils
 				Log.d("GattCallback", "onCharacteristicChanged");
 				//TODO: Read weight data and parse to UI
 
-				Weight weight = new Weight (characteristic.getValue());
+				final Weight weight = new Weight (characteristic.getValue());
 
 				Log.d("GattCallback", "Weight data: " + weight.weight());
 				Log.d("GattCallback", "IsStabilized: " + weight.isStabilized());
 				Log.d("GattCallback", "IsWeightRemoved: " + weight.isWeightRemoved());
+
+				activity.runOnUiThread(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						TextView weightTextView = (TextView) activity.findViewById(R.id.scaleWeightText);
+						TextView measureUnitTextView = (TextView) activity.findViewById(R.id.measurementUnitText);
+						TextView stabilizedTextView = (TextView) activity.findViewById(R.id.scaleStabilizationText);
+						TextView unloadWeightTextView = (TextView) activity.findViewById(R.id.unloadWeightText);
+
+						weightTextView.setText(weight.weight() + "");
+
+						if ( weight.getMeasureSystem() == Weight.CATTY )
+							measureUnitTextView.setText("Catty");
+						else if ( weight.getMeasureSystem() == Weight.LBS )
+							measureUnitTextView.setText("lbs");
+						else if ( weight.getMeasureSystem() == Weight.KG )
+							measureUnitTextView.setText("kg");
+
+						if ( weight.isStabilized() )
+							stabilizedTextView.setText("Stabilized");
+						else
+							stabilizedTextView.setText("");
+
+						if ( weight.isWeightRemoved() )
+							unloadWeightTextView.setText("Weight removed");
+						else
+							unloadWeightTextView.setText("");
+
+					}
+				});
+
 			}
 		};
 	}
@@ -253,7 +277,8 @@ public class Utils
 
 		prepareBTAdapter(activity);
 
-		mHandler = new Handler();
+		if ( mHandler == null )
+			mHandler = new Handler();
 
 		if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled())
 		{
@@ -278,19 +303,31 @@ public class Utils
 				public void run()
 				{
 					Log.d("StartStopBLEScanning", "Scan expired because of time : " + SCAN_PERIOD);
-					mScanning = false;
 					bluetoothAdapter.stopLeScan(scanCallback);
+
+					activity.runOnUiThread(new Runnable()
+					{
+						@Override
+						public void run()
+						{
+							TextView scaleNameTextView = (TextView) activity.findViewById(R.id.scaleNameText);
+							scaleNameTextView.setText("(Scale not found)");
+
+							TextView scaleStatusTextView = (TextView) activity.findViewById(R.id.scaleStatusText);
+							scaleStatusTextView.setText("Could not find scale. Check scale battery and reception, and launch again");
+						}
+					});
+
 				}
 			}, SCAN_PERIOD);
 
-			mScanning = true;
 			bluetoothAdapter.startLeScan(scanCallback);
 
 		}
 		else
 		{
 			Log.d("StartStopBLEScanning", "Scan exited gracefully");
-			mScanning = false;
+			mHandler.removeCallbacksAndMessages(null);
 			bluetoothAdapter.stopLeScan(scanCallback);
 		}
 
