@@ -38,10 +38,10 @@ public class MainActivity extends Activity
 			}
 		}
 		TextView scaleNameTextView = (TextView) findViewById(R.id.scaleNameText);
-		scaleNameTextView.setText("(Searching...)");
+		scaleNameTextView.setText(R.string.scaleSearchingString);
 
 		TextView scaleStatusTextView = (TextView) findViewById(R.id.scaleStatusText);
-		scaleStatusTextView.setText("If not found, step up.");
+		scaleStatusTextView.setText(R.string.scaleSearchingStatusString);
 
 		Log.d("MainActivity", "Starting scan...");
 		Utils.startStopBLEScanning(this, true);
@@ -55,8 +55,8 @@ public class MainActivity extends Activity
 		final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
 
 		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Permission required");
-		builder.setMessage("Starting from Android M, location permission is required to access BLE scan data from background.");
+		builder.setTitle(R.string.locationPermissionRequiredString);
+		builder.setMessage(R.string.locationPermissionRequiredMessageString);
 		builder.setPositiveButton(android.R.string.ok, null);
 		builder.setOnDismissListener(new DialogInterface.OnDismissListener()
 		{
@@ -84,10 +84,11 @@ public class MainActivity extends Activity
 			Log.d("MainActivity", "Starting scan...");
 
 			TextView scaleNameTextView = (TextView) findViewById(R.id.scaleNameText);
-			scaleNameTextView.setText("(Searching...)");
+			scaleNameTextView.setText(R.string.scaleSearchingString);
 
 			TextView scaleStatusTextView = (TextView) findViewById(R.id.scaleStatusText);
-			scaleStatusTextView.setText("If not found, step up.");
+			scaleStatusTextView.setText(R.string.scaleSearchingStatusString);
+
 
 			Utils.startStopBLEScanning(this, true);
 

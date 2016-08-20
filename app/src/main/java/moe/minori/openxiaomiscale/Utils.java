@@ -97,10 +97,10 @@ public class Utils
 						public void run()
 						{
 							TextView scaleNameTextView = (TextView) activity.findViewById(R.id.scaleNameText);
-							scaleNameTextView.setText("(Disconnected)");
+							scaleNameTextView.setText(R.string.scaleDisconnectedString);
 
 							TextView scaleStatusTextView = (TextView) activity.findViewById(R.id.scaleStatusText);
-							scaleStatusTextView.setText("Disconnected due to range, idle, etc.");
+							scaleStatusTextView.setText(R.string.stringDisconnectedStatusString);
 
 							Button scanStartButton = (Button) activity.findViewById(R.id.scanStartButton);
 							scanStartButton.setVisibility(View.VISIBLE);
@@ -139,7 +139,7 @@ public class Utils
 										scaleNameTextView.setText(gatt.getDevice().getName() + "(" + gatt.getDevice().getAddress() + ")");
 
 										TextView scaleStatusTextView = (TextView) activity.findViewById(R.id.scaleStatusText);
-										scaleStatusTextView.setText("Scale found, go ahead.");
+										scaleStatusTextView.setText(R.string.scaleFoundStatusString);
 									}
 								});
 
@@ -261,19 +261,19 @@ public class Utils
 						weightTextView.setText(weight.weight() + "");
 
 						if ( weight.getMeasureSystem() == Weight.CATTY )
-							measureUnitTextView.setText("Catty");
+							measureUnitTextView.setText(R.string.measurementUnitCattyString);
 						else if ( weight.getMeasureSystem() == Weight.LBS )
-							measureUnitTextView.setText("lbs");
+							measureUnitTextView.setText(R.string.measurementUnitLbsString);
 						else if ( weight.getMeasureSystem() == Weight.KG )
-							measureUnitTextView.setText("kg");
+							measureUnitTextView.setText(R.string.measurementUnitKgString);
 
 						if ( weight.isStabilized() )
-							stabilizedTextView.setText("Stabilized");
+							stabilizedTextView.setText(R.string.stabilizedString);
 						else
 							stabilizedTextView.setText("");
 
 						if ( weight.isWeightRemoved() )
-							unloadWeightTextView.setText("Weight removed");
+							unloadWeightTextView.setText(R.string.weightRemovedString);
 						else
 							unloadWeightTextView.setText("");
 
@@ -333,10 +333,10 @@ public class Utils
 						public void run()
 						{
 							TextView scaleNameTextView = (TextView) activity.findViewById(R.id.scaleNameText);
-							scaleNameTextView.setText("(Scale not found)");
+							scaleNameTextView.setText(R.string.scaleNotFoundString);
 
 							TextView scaleStatusTextView = (TextView) activity.findViewById(R.id.scaleStatusText);
-							scaleStatusTextView.setText("Could not find scale. Check scale battery and reception, and launch again");
+							scaleStatusTextView.setText(R.string.scaleNotFoundStatusString);
 
 							Button scanStartButton = (Button) activity.findViewById(R.id.scanStartButton);
 							scanStartButton.setVisibility(View.VISIBLE);
