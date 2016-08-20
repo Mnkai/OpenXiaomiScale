@@ -1,6 +1,11 @@
 # OpenXiaomiScale
 View and manage Mi Scale without bloatware. (WIP)
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Mnkai/OpenXiaomiScale/master/scr1-ko.jpg" alt="Screenshot with weight, BMI information, Korean language" width="350"/>
+  <img src="https://raw.githubusercontent.com/Mnkai/OpenXiaomiScale/master/scr2-ko.jpg" alt="Screenshot with settings, Korean language" width="350"/>
+</p>
+
 # Works
 Weight and measurement unit in foreground, BMI calculation
 
