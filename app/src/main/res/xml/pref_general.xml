@@ -4,55 +4,53 @@
 
     <SwitchPreference
         android:defaultValue="false"
-        android:id="@+id/settingsBMICalculation"
         android:key="settingsBMICalculation"
-        android:summary="Calculates BMI data based on your personal information below"
-        android:title="BMI"/>
+        android:summary="@string/bmiMasterSummaryString"
+        android:title="@string/bmiMasterTitleString"/>
 
     <PreferenceCategory
-        android:title="Personal Information"
+        android:title="@string/personalInformationCategoryTitleString"
         android:dependency="settingsBMICalculation">
 
         <SwitchPreference
             android:key="settingsBMIImperial"
-            android:title="Imperial Unit"
+            android:title="@string/imperialUnitTitleString"
             android:defaultValue="false"
-            android:summary="Centimeter / feet unit for height data"
+            android:summary="@string/imperialUnitSummaryString"
             android:dependency="settingsBMICalculation"/>
 
         <EditTextPreference
             android:key="settingsHeight"
             android:defaultValue="100.0"
             android:inputType="numberDecimal"
-            android:summary="Actual height data"
-            android:title="Height"
+            android:summary="@string/heightSummaryString"
+            android:title="@string/heightTitleString"
             android:dependency="settingsBMICalculation" />
 
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="Advanced (Normally, you don't have to change this)">
+        android:title="@string/advancedCategoryTitleString">
 
         <EditTextPreference
             android:defaultValue="10000"
             android:key="settingsScanMaxDuration"
-            android:id="@+id/settingsScanMaxDuration"
-            android:title="Maximum scan duration"
-            android:summary="Configures maximum scan duration.\nHigher the number, longer it will try to search scale.\n(Default: 10000 miliseconds)"
-            android:inputType="numberDecimal" />
+            android:title="@string/maximumScanDurationTitleString"
+            android:summary="@string/maximumScanDurationSummaryString"
+            android:inputType="number" />
 
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="Information">
+        android:title="@string/informationCategoryTitleString">
 
         <Preference
-            android:title="License"
-            android:summary="Apache License 2.0" />
+            android:title="@string/licenseTitleString"
+            android:summary="@string/licenseSummaryString" />
 
         <Preference
-            android:title="Bug report and source"
-            android:summary="Press here to launch web browser" />
+            android:title="@string/bugReportTitleString"
+            android:summary="@string/bugReportSummaryString" />
 
     </PreferenceCategory>
 

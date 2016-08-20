@@ -18,4 +18,19 @@
     <string name="measurementUnitPlaceholderString">(단위)</string>
     <string name="scaleNameLableString">저울: </string>
     <string name="scanStartButtonString">검색 시작</string>
+    <string name="advancedCategoryTitleString">고급 옵션 (일반적으론, 이걸 건드릴 필요가 없습니다)</string>
+    <string name="bmiMasterSummaryString">아래에 있는 개인 정보를 바탕으로 BMI 데이터 계산</string>
+    <string name="bmiMasterTitleString">BMI (신체질량지수)</string>
+    <string name="bugReportSummaryString">여기를 눌러 웹 브라우저를 엽니다</string>
+    <string name="bugReportTitleString">버그 리포트와 소스 코드</string>
+    <string name="heightSummaryString">실제 키 데이터 (센티미터 혹은 피트 단위)</string>
+    <string name="heightTitleString">키</string>
+    <string name="imperialUnitSummaryString">키 데이터의 단위 (센티미터 혹은 피트)</string>
+    <string name="imperialUnitTitleString">야드파운드법</string>
+    <string name="informationCategoryTitleString">정보</string>
+    <string name="licenseTitleString">라이센스</string>
+    <string name="maximumScanDurationSummaryString">최대 검색 시간을 설정합니다.\n숫자가 커질수록 저울을 오래 찾으려고 시도합니다.\n기본값: 10000 밀리초</string>
+    <string name="maximumScanDurationTitleString">최대 검색 시간</string>
+    <string name="personalInformationCategoryTitleString">개인 정보</string>
+    <string name="settingTitleString">설정</string>
 </resources>

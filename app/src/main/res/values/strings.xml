@@ -17,5 +17,21 @@
     <string name="scanStartButtonString">Scan start</string>
     <string name="scaleNameLableString">Scale: </string>
     <string name="measurementUnitPlaceholderString">(Unit)</string>
+    <string name="settingTitleString">Settings</string>
+    <string name="bmiMasterSummaryString">Calculates BMI data based on your personal information below</string>
+    <string name="bmiMasterTitleString">BMI</string>
+    <string name="imperialUnitTitleString">Imperial Unit</string>
+    <string name="imperialUnitSummaryString">Centimeter or feet unit for height data</string>
+    <string name="heightTitleString">Height</string>
+    <string name="heightSummaryString">Actual height data (Centimeter or feet unit)</string>
+    <string name="personalInformationCategoryTitleString">Personal Information</string>
+    <string name="advancedCategoryTitleString">Advanced Option (Normally, you don\'t have to change this)</string>
+    <string name="maximumScanDurationTitleString">Maximum scan duration</string>
+    <string name="maximumScanDurationSummaryString">Configures maximum scan duration.\nHigher the number, longer it will try to search scale.\n(Default: 10000 miliseconds)</string>
+    <string name="informationCategoryTitleString">Information</string>
+    <string name="licenseTitleString">License</string>
+    <string name="licenseSummaryString" translatable="false">Apache License 2.0</string>
+    <string name="bugReportTitleString">Bug report and source code</string>
+    <string name="bugReportSummaryString">Press here to launch web browser</string>
 
 </resources>
