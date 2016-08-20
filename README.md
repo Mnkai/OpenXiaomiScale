@@ -2,10 +2,10 @@
 View and manage Mi Scale without bloatware. (WIP)
 
 # Works
-Weight and measurement unit in foreground
+Weight and measurement unit in foreground, BMI calculation
 
 # Future works
-BMI calculation, history management, history management w/ multi user usage environment
+History management, History management w/ multi user usage environment
 
 # Build
 Use Android Studio
