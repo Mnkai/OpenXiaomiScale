@@ -18,6 +18,7 @@ import android.widget.ShareActionProvider;
 import moe.minori.openxiaomiscale.BTUtils;
 import moe.minori.openxiaomiscale.R;
 import moe.minori.openxiaomiscale.UIUtils;
+import moe.minori.openxiaomiscale.objects.Database;
 import moe.minori.openxiaomiscale.objects.Log;
 
 public class MainActivity extends Activity
@@ -105,8 +106,6 @@ public class MainActivity extends Activity
 			}
 		}
 
-
-
 		Log.d("MainActivity", "Starting scan...");
 		BTUtils.startStopBLEScanning(this, true);
 
@@ -117,20 +116,23 @@ public class MainActivity extends Activity
 	@TargetApi(Build.VERSION_CODES.M)
 	private void androidMPermissionCheck()
 	{
-		final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
+		final int PERMISSION_REQUEST_CODE = 1;
 
 		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(R.string.locationPermissionRequiredString);
-		builder.setMessage(R.string.locationPermissionRequiredMessageString);
+		builder.setTitle(R.string.permissionRequiredString);
+		builder.setMessage(R.string.permissionRequiredMessageString);
 		builder.setPositiveButton(android.R.string.ok, null);
 		builder.setOnDismissListener(new DialogInterface.OnDismissListener()
 		{
 			public void onDismiss(DialogInterface dialog)
 			{
-				requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_REQUEST_COARSE_LOCATION);
+				requestPermissions(
+						new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+						PERMISSION_REQUEST_CODE);
 			}
 
 		});
+
 		builder.show();
 	}
 

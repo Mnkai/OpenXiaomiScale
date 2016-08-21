@@ -235,7 +235,7 @@ public class BTUtils
 				{
 					// Store current weight object's data in database
 
-					Database database = new Database();
+					Database database = new Database(activity);
 
 					database.insertElement(new WeightDBElement(weight, 1));
 

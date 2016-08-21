@@ -2,8 +2,8 @@
     <string name="app_name">OpenXiaomiScale</string>
     <string name="scaleSearchingString">(Searching...)</string>
     <string name="scaleSearchingStatusString">If not found, step up.</string>
-    <string name="locationPermissionRequiredString">Permission required</string>
-    <string name="locationPermissionRequiredMessageString">Starting from Android M, location permission is required to access BLE scan data from background.</string>
+    <string name="permissionRequiredString">Permission required</string>
+    <string name="permissionRequiredMessageString">Starting from Android M, location permission is required to access BLE scan data from background.</string>
     <string name="scaleDisconnectedString">(Disconnected)</string>
     <string name="stringDisconnectedStatusString">Disconnected due to range, idle, etc.</string>
     <string name="measurementUnitCattyString">jin</string>

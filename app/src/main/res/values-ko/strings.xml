@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">OpenXiaomiScale</string>
-    <string name="locationPermissionRequiredMessageString">안드로이드 M부터 블루투스 LE 장치 스캔을 위해 위치 권한이 필요합니다. </string>
-    <string name="locationPermissionRequiredString">권한 필요</string>
+    <string name="permissionRequiredMessageString">안드로이드 M부터 블루투스 LE 장치 스캔을 위해 위치 권한이 필요합니다. </string>
+    <string name="permissionRequiredString">권한 필요</string>
     <string name="measurementUnitCattyString">중국 근</string>
     <string name="measurementUnitKgString">킬로그램</string>
     <string name="measurementUnitLbsString">파운드</string>

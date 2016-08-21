@@ -1,6 +1,9 @@
 package moe.minori.openxiaomiscale.objects;
 
+import android.app.Activity;
+import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteCantOpenDatabaseException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 
@@ -12,13 +15,14 @@ import java.util.ArrayList;
  */
 public class Database
 {
-	private String DB_PATH = "/data/data/moe.minori.openxiaomiscale/databases/";
+	//private String DB_PATH = "/data/data/moe.minori.openxiaomiscale/databases/";
+	private String DB_PATH;
 
 	//Table name
 	final public String WEIGHT_TABLE_NAME = "WEIGHT";
 	final public String USER_TABLE_NAME = "USERS";
 
-	final public String DATABASE_NAME = "OPENXIAOMISCALE";
+	final public String DATABASE_NAME = "openxiaomiscale.db";
 
 	//Create table
 	final public String CREATE_WEIGHT_TABLE_QUERY =
@@ -26,18 +30,25 @@ public class Database
 					"UNIXTIME INTEGER PRIMARY KEY," +
 					"WEIGHTVALUE REAL NOT NULL," +
 					"WEIGHTUNIT INTEGER NOT NULL," +
-					"FOREIGN KEY(USERID) REFERENCES " + USER_TABLE_NAME + "(USERID)" +
+					"USERID INTEGER," +
+					"FOREIGN KEY(USERID) REFERENCES " + USER_TABLE_NAME + "(ID)" +
 					")";
 
 	final public String CREATE_USER_TABLE_QUERY =
 			"CREATE TABLE " + USER_TABLE_NAME + " (" +
-					"USERID INTEGER PRIMARY KEY AUTOINCREMENT," +
+					"ID INTEGER PRIMARY KEY AUTOINCREMENT," +
 					"USERNAME TEXT" +
 					")";
 
-	public Database()
+	Activity activity = null;
+
+	public Database(Activity a)
 	{
+		Log.d("Database", "Database constructor called!");
+		activity = a;
 		// Check if database file already exists
+
+		DB_PATH = activity.getFilesDir().getPath() + "/" + DATABASE_NAME;
 
 		if (!existsDatabase())
 		{
@@ -47,11 +58,13 @@ public class Database
 
 	public void insertElement (WeightDBElement element)
 	{
+		Log.d("Database", "Insert element called!");
+
 		SQLiteDatabase database = null;
 
 		try
 		{
-			database = SQLiteDatabase.openDatabase(DB_PATH + DATABASE_NAME, null, SQLiteDatabase.OPEN_READWRITE);
+			database = SQLiteDatabase.openDatabase(DB_PATH, null, SQLiteDatabase.OPEN_READWRITE);
 
 			database.setForeignKeyConstraintsEnabled(true);
 
@@ -92,7 +105,7 @@ public class Database
 
 		try
 		{
-			database = SQLiteDatabase.openDatabase(DB_PATH + DATABASE_NAME, null, SQLiteDatabase.OPEN_READONLY);
+			database = SQLiteDatabase.openDatabase(DB_PATH, null, SQLiteDatabase.OPEN_READONLY);
 
 			StringBuilder stringBuilder = new StringBuilder();
 
@@ -165,6 +178,8 @@ public class Database
 
 			Cursor cursor = database.rawQuery(stringBuilder.toString(), null);
 
+			cursor.moveToNext();
+
 			while ( !cursor.isLast() )
 			{
 				long tempTime;
@@ -206,11 +221,12 @@ public class Database
 
 		try
 		{
-			database = SQLiteDatabase.openDatabase(DB_PATH + DATABASE_NAME, null, SQLiteDatabase.OPEN_READONLY);
+			database = SQLiteDatabase.openDatabase(DB_PATH, null, SQLiteDatabase.OPEN_READONLY);
 		}
-		catch (SQLiteException e)
+		catch (SQLiteCantOpenDatabaseException e)
 		{
 			// No database
+			Log.d("Database", "Database not found!");
 			isExist = false;
 		}
 		finally
@@ -224,11 +240,13 @@ public class Database
 
 	private void createDatabaseAndInitialize()
 	{
+		Log.d("Database", "Database initializing...");
+
 		SQLiteDatabase database = null;
 
 		try
 		{
-			database = SQLiteDatabase.openDatabase(DB_PATH + DATABASE_NAME, null, SQLiteDatabase.OPEN_READWRITE);
+			database = activity.openOrCreateDatabase(DB_PATH, Context.MODE_PRIVATE, null);
 
 			database.setForeignKeyConstraintsEnabled(true);
 
@@ -241,7 +259,7 @@ public class Database
 			database.execSQL(CREATE_WEIGHT_TABLE_QUERY);
 
 			// Add default user to users table, it will have id 1
-			database.execSQL("INSERT INTO " + USER_TABLE_NAME + " VALUES ('Default')");
+			database.execSQL("INSERT INTO " + USER_TABLE_NAME + " VALUES (1,'Default')");
 		}
 		catch (SQLiteException e)
 		{
@@ -252,6 +270,8 @@ public class Database
 		}
 		finally
 		{
+			Log.d("Database", "Database initialize finished!");
+
 			if ( database != null )
 				database.close();
 		}
