@@ -12,19 +12,16 @@ import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import moe.minori.openxiaomiscale.activity.MainActivity;
-import moe.minori.openxiaomiscale.objects.BMI;
+import moe.minori.openxiaomiscale.objects.Database;
 import moe.minori.openxiaomiscale.objects.Log;
 import moe.minori.openxiaomiscale.objects.Weight;
+import moe.minori.openxiaomiscale.objects.WeightDBElement;
 
 /**
  * Created by minori on 16. 8. 20.
@@ -234,6 +231,16 @@ public class BTUtils
 
 				UIUtils.updateUIWeightInformation(activity, weight, PreferenceManager.getDefaultSharedPreferences(activity));
 
+				if ( weight.isStabilized() && weight.isWeightRemoved() )
+				{
+					// Store current weight object's data in database
+
+					Database database = new Database();
+
+					database.insertElement(new WeightDBElement(weight, 1));
+
+
+				}
 			}
 		};
 	}

@@ -39,5 +39,6 @@
     <string name="bmiOverweightString">Overweight</string>
     <string name="bmiObeseString">Obese</string>
     <string name="bmiExtremelyobeseString">Extremely Obese</string>
+    <string name="historyMenuString">History</string>
 
 </resources>
