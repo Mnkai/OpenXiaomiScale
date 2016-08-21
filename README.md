@@ -20,6 +20,7 @@ Apache 2.0
 
 # Third party libraries
 MPAndroidChart (https://github.com/PhilJay/MPAndroidChart) - Apache License 2.0
+Scales Free Icon, Freepik (http://www.freepik.com) - Creative Commons BY 3.0
 
 # Special thanks
 perillamint (https://wiki.gentoo.moe/wiki/Mi-scale) and chaeplin (https://github.com/chaeplin/Xiaomi_scale_scan)
