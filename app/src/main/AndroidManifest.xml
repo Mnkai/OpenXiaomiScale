@@ -29,6 +29,8 @@
             android:name=".activity.SettingsActivity"
             android:label="@string/settingTitleString">
         </activity>
+        <activity android:name=".activity.HistoryActivity">
+        </activity>
     </application>
 
 </manifest>

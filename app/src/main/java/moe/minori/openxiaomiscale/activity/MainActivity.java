@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,11 +13,10 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import moe.minori.openxiaomiscale.BTUtils;
 import moe.minori.openxiaomiscale.R;
+import moe.minori.openxiaomiscale.UIUtils;
 import moe.minori.openxiaomiscale.objects.Log;
 
 public class MainActivity extends Activity
@@ -66,46 +64,13 @@ public class MainActivity extends Activity
 				return;
 			}
 		}
-		TextView scaleNameTextView = (TextView) findViewById(R.id.scaleNameText);
-		scaleNameTextView.setText(R.string.scaleSearchingString);
 
-		TextView scaleStatusTextView = (TextView) findViewById(R.id.scaleStatusText);
-		scaleStatusTextView.setText(R.string.scaleSearchingStatusString);
+
 
 		Log.d("MainActivity", "Starting scan...");
 		BTUtils.startStopBLEScanning(this, true);
 
-		// BMI layout
-		SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(this);
-
-		boolean isBmiEnabled = preference.getBoolean("settingsBMICalculation", false);
-
-		TextView bmiLabelTextView = (TextView) findViewById(R.id.bmiLabelText);
-		TextView bmiValueTextView = (TextView) findViewById(R.id.bmiValueText);
-		TextView bmiInformationTextView = (TextView) findViewById(R.id.bmiInformationText);
-
-
-		if ( isBmiEnabled )
-		{
-			bmiValueTextView.setText("");
-			bmiInformationTextView.setText("");
-
-			bmiLabelTextView.setVisibility(View.VISIBLE);
-			bmiValueTextView.setVisibility(View.VISIBLE);
-			bmiInformationTextView.setVisibility(View.VISIBLE);
-		}
-		else
-		{
-			bmiValueTextView.setText("");
-			bmiInformationTextView.setText("");
-
-			bmiLabelTextView.setVisibility(View.GONE);
-			bmiValueTextView.setVisibility(View.GONE);
-			bmiInformationTextView.setVisibility(View.GONE);
-		}
-
-
-
+		UIUtils.bmiLayoutVisibility(this, PreferenceManager.getDefaultSharedPreferences(this));
 	}
 
 
@@ -144,17 +109,12 @@ public class MainActivity extends Activity
 		{
 			Log.d("MainActivity", "Starting scan...");
 
-			TextView scaleNameTextView = (TextView) findViewById(R.id.scaleNameText);
-			scaleNameTextView.setText(R.string.scaleSearchingString);
-
-			TextView scaleStatusTextView = (TextView) findViewById(R.id.scaleStatusText);
-			scaleStatusTextView.setText(R.string.scaleSearchingStatusString);
-
+			UIUtils.updateUIScaleInformation(this,
+					getResources().getString(R.string.scaleSearchingString),
+					getResources().getString(R.string.scaleSearchingStatusString),
+					false);
 
 			BTUtils.startStopBLEScanning(this, true);
-
-			Button scanStartButton = (Button) findViewById(R.id.scanStartButton);
-			scanStartButton.setVisibility(View.GONE);
 		}
 	}
 }

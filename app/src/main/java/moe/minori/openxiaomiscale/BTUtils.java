@@ -95,21 +95,11 @@ public class BTUtils
 				{
 					Log.d("GattCallback", "Gatt disconnected");
 
-					activity.runOnUiThread(new Runnable()
-					{
-						@Override
-						public void run()
-						{
-							TextView scaleNameTextView = (TextView) activity.findViewById(R.id.scaleNameText);
-							scaleNameTextView.setText(R.string.scaleDisconnectedString);
+					UIUtils.updateUIScaleInformation(activity,
+							activity.getResources().getString(R.string.scaleDisconnectedString),
+							activity.getResources().getString(R.string.stringDisconnectedStatusString),
+							true);
 
-							TextView scaleStatusTextView = (TextView) activity.findViewById(R.id.scaleStatusText);
-							scaleStatusTextView.setText(R.string.stringDisconnectedStatusString);
-
-							Button scanStartButton = (Button) activity.findViewById(R.id.scanStartButton);
-							scanStartButton.setVisibility(View.VISIBLE);
-						}
-					});
 
 					stopGatt();
 					startStopBLEScanning(activity, false);
@@ -134,18 +124,10 @@ public class BTUtils
 							{
 								// Weight param discovered
 
-								activity.runOnUiThread(new Runnable()
-								{
-									@Override
-									public void run()
-									{
-										TextView scaleNameTextView = (TextView) activity.findViewById(R.id.scaleNameText);
-										scaleNameTextView.setText(gatt.getDevice().getName() + "(" + gatt.getDevice().getAddress() + ")");
-
-										TextView scaleStatusTextView = (TextView) activity.findViewById(R.id.scaleStatusText);
-										scaleStatusTextView.setText(R.string.scaleFoundStatusString);
-									}
-								});
+								UIUtils.updateUIScaleInformation(activity,
+										gatt.getDevice().getName() + "(" + gatt.getDevice().getAddress() + ")",
+										activity.getResources().getString(R.string.scaleFoundStatusString),
+										false);
 
 								weightCharacteristic = two;
 
@@ -200,9 +182,6 @@ public class BTUtils
 			{
 				super.onDescriptorWrite(gatt, descriptor, status);
 				Log.d("GattCallback", "onDescriptorWrite");
-
-
-
 			}
 
 			@Override
@@ -244,7 +223,7 @@ public class BTUtils
 			{
 				super.onCharacteristicChanged(gatt, characteristic);
 				Log.d("GattCallback", "onCharacteristicChanged");
-				//TODO: Read weight data and parse to UI
+				//TODO: Separate UI&DB and backend code
 
 				final Weight weight = new Weight (characteristic.getValue());
 
@@ -252,74 +231,7 @@ public class BTUtils
 				Log.d("GattCallback", "IsStabilized: " + weight.isStabilized());
 				Log.d("GattCallback", "IsWeightRemoved: " + weight.isWeightRemoved());
 
-				activity.runOnUiThread(new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						TextView weightTextView = (TextView) activity.findViewById(R.id.scaleWeightText);
-						TextView measureUnitTextView = (TextView) activity.findViewById(R.id.measurementUnitText);
-						TextView stabilizedTextView = (TextView) activity.findViewById(R.id.scaleStabilizationText);
-						TextView unloadWeightTextView = (TextView) activity.findViewById(R.id.unloadWeightText);
-
-						TextView bmiValueTextView = (TextView) activity.findViewById(R.id.bmiValueText);
-						TextView bmiInformationTextView = (TextView) activity.findViewById(R.id.bmiInformationText);
-
-						weightTextView.setText(weight.weight() + "");
-
-						if ( weight.getMeasureSystem() == Weight.CATTY )
-							measureUnitTextView.setText(R.string.measurementUnitCattyString);
-						else if ( weight.getMeasureSystem() == Weight.LBS )
-							measureUnitTextView.setText(R.string.measurementUnitLbsString);
-						else if ( weight.getMeasureSystem() == Weight.KG )
-							measureUnitTextView.setText(R.string.measurementUnitKgString);
-
-						if ( weight.isStabilized() )
-							stabilizedTextView.setText(R.string.stabilizedString);
-						else
-							stabilizedTextView.setText("");
-
-						if ( weight.isWeightRemoved() )
-							unloadWeightTextView.setText(R.string.weightRemovedString);
-						else
-							unloadWeightTextView.setText("");
-
-						SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(activity);
-
-						float bmi = new BMI(
-								Float.parseFloat(preference.getString("settingsHeight", "100")),
-								preference.getBoolean("settingsBMIImperial", false),
-								weight.weight(),
-								weight.getMeasureSystem()).getBMI();
-
-						bmiValueTextView.setText(bmi + "");
-
-						if ( bmi < 18.5 )
-						{
-							bmiInformationTextView.setText("Underweight");
-						}
-						else if ( bmi < 25 )
-						{
-							bmiInformationTextView.setText("Normal weight");
-
-						}
-						else if ( bmi < 30)
-						{
-							bmiInformationTextView.setText("Overweight");
-
-						}
-						else if ( bmi < 40 )
-						{
-							bmiInformationTextView.setText("Obese");
-
-						}
-						else
-						{
-							bmiInformationTextView.setText("Extremely Obese");
-
-						}
-					}
-				});
+				UIUtils.updateUIWeightInformation(activity, weight, PreferenceManager.getDefaultSharedPreferences(activity));
 
 			}
 		};
@@ -368,21 +280,11 @@ public class BTUtils
 					Log.d("StartStopBLEScanning", "Scan expired because of time");
 					bluetoothAdapter.stopLeScan(scanCallback);
 
-					activity.runOnUiThread(new Runnable()
-					{
-						@Override
-						public void run()
-						{
-							TextView scaleNameTextView = (TextView) activity.findViewById(R.id.scaleNameText);
-							scaleNameTextView.setText(R.string.scaleNotFoundString);
+					UIUtils.updateUIScaleInformation(activity,
+							activity.getResources().getString(R.string.scaleNotFoundString),
+							activity.getResources().getString(R.string.scaleNotFoundStatusString),
+							true);
 
-							TextView scaleStatusTextView = (TextView) activity.findViewById(R.id.scaleStatusText);
-							scaleStatusTextView.setText(R.string.scaleNotFoundStatusString);
-
-							Button scanStartButton = (Button) activity.findViewById(R.id.scanStartButton);
-							scanStartButton.setVisibility(View.VISIBLE);
-						}
-					});
 
 				}
 			}, Long.parseLong(PreferenceManager.getDefaultSharedPreferences(activity).getString("settingsScanMaxDuration", "10000")));
