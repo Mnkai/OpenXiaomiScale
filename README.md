@@ -20,6 +20,8 @@ Apache 2.0
 
 # Third party libraries
 MPAndroidChart (https://github.com/PhilJay/MPAndroidChart) - Apache License 2.0
+
+
 Scales Free Icon, Freepik (http://www.freepik.com) - Creative Commons BY 3.0
 
 # Special thanks
