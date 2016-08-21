@@ -22,6 +22,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import moe.minori.openxiaomiscale.objects.BMI;
+import moe.minori.openxiaomiscale.objects.Log;
 import moe.minori.openxiaomiscale.objects.Weight;
 
 /**
