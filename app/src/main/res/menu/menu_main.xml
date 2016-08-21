@@ -8,11 +8,17 @@
         android:showAsAction="never"
         android:title="@string/shareButtonString"
         android:actionProviderClass="android.widget.ShareActionProvider"
+        android:orderInCategory="100"
         tools:ignore="AppCompatResource"/>
+
+    <item
+        android:id="@+id/menu_history"
+        android:title="@string/historyMenuString"
+        android:orderInCategory="200" />
 
 
     <item
         android:id="@+id/menu_settings"
-        android:orderInCategory="100"
+        android:orderInCategory="300"
         android:title="@string/settingTitleString"/>
 </menu>
