@@ -13,6 +13,7 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ShareActionProvider;
 
 import moe.minori.openxiaomiscale.BTUtils;
 import moe.minori.openxiaomiscale.R;
@@ -21,12 +22,47 @@ import moe.minori.openxiaomiscale.objects.Log;
 
 public class MainActivity extends Activity
 {
+	private ShareActionProvider mShareActionProvider;
+	public static boolean isShareIconEnabled = false;
+
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu)
+	{
+		MenuItem item = menu.findItem(R.id.menu_item_share);
+
+		if (isShareIconEnabled) {
+			item.setEnabled(true);
+			item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		} else {
+			// disabled
+			item.setEnabled(false);
+			item.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+		}
+
+		return super.onPrepareOptionsMenu(menu);
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
 		getMenuInflater().inflate(R.menu.menu_main, menu);
 
+		// Locate MenuItem with ShareActionProvider
+		MenuItem item = menu.findItem(R.id.menu_item_share);
+
+		// Fetch and store ShareActionProvider
+		mShareActionProvider = (ShareActionProvider) item.getActionProvider();
+
 		return true;
+	}
+
+	// Call to update the share intent
+	public void setShareIntent(Intent shareIntent)
+	{
+		if (mShareActionProvider != null)
+		{
+			mShareActionProvider.setShareIntent(shareIntent);
+		}
 	}
 
 	@Override

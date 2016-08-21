@@ -33,4 +33,10 @@
     <string name="maximumScanDurationTitleString">최대 검색 시간</string>
     <string name="personalInformationCategoryTitleString">개인 정보</string>
     <string name="settingTitleString">설정</string>
+    <string name="bmiExtremelyobeseString">고도 비만</string>
+    <string name="bmiNormalweightString">일반 체중</string>
+    <string name="bmiObeseString">비만</string>
+    <string name="bmiOverweightString">과체중</string>
+    <string name="bmiUnderweightString">저체중</string>
+    <string name="shareButtonString">공유</string>
 </resources>

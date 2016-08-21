@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import moe.minori.openxiaomiscale.activity.MainActivity;
 import moe.minori.openxiaomiscale.objects.BMI;
 import moe.minori.openxiaomiscale.objects.Log;
 import moe.minori.openxiaomiscale.objects.Weight;
@@ -40,7 +41,7 @@ public class BTUtils
 	private static BluetoothAdapter.LeScanCallback scanCallback = null;
 	private static BluetoothGattCallback gattCallback = null;
 
-	private static void prepareBLECallback(final Activity activity)
+	private static void prepareBLECallback(final MainActivity activity)
 	{
 		// Prepare callback
 		scanCallback = new BluetoothAdapter.LeScanCallback()
@@ -77,7 +78,7 @@ public class BTUtils
 		bluetoothAdapter = bluetoothManager.getAdapter();
 	}
 
-	private static void prepareGATTCallback(final Activity activity)
+	private static void prepareGATTCallback(final MainActivity activity)
 	{
 		gattCallback = new BluetoothGattCallback()
 		{
@@ -246,7 +247,7 @@ public class BTUtils
 	 *                 If false, stop scanning.
 	 *                 Scanning will stop automatically after 10 seconds without explicit function call
 	 */
-	public static void startStopBLEScanning(final Activity activity, final boolean enable)
+	public static void startStopBLEScanning(final MainActivity activity, final boolean enable)
 	{
 		final int REQUEST_ENABLE_BT = 2;
 
@@ -301,7 +302,7 @@ public class BTUtils
 
 	}
 
-	public static void startGatt(BluetoothDevice device, Activity activity)
+	public static void startGatt(BluetoothDevice device, MainActivity activity)
 	{
 		if (bluetoothAdapter == null)
 		{

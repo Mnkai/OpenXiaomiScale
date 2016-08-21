@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_item_share"
+        android:showAsAction="never"
+        android:title="@string/shareButtonString"
+        android:actionProviderClass="android.widget.ShareActionProvider"
+        tools:ignore="AppCompatResource"/>
+
+
     <item
         android:id="@+id/menu_settings"
         android:orderInCategory="100"
-        android:title="@string/settingTitleString" />
+        android:title="@string/settingTitleString"/>
 </menu>
