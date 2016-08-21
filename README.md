@@ -13,7 +13,7 @@ Weight and measurement unit in foreground, BMI calculation
 History management, History management w/ multi user usage environment
 
 # Build
-Use Android Studio
+Use Android Studio. Master branch is *not* guaranteed to work in current stage.
 
 # License
 Apache 2.0
