@@ -1,5 +1,9 @@
 package moe.minori.openxiaomiscale.objects;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by minori on 16. 8. 20.
  */
@@ -30,6 +34,27 @@ public class Weight
 			else
 				return KG;
 		}
+	}
+
+	public Date getDate()
+	{
+		Date dataTime = null;
+
+		final int year = ((data[4] & 0xFF) << 8) | (data[3] & 0xFF);
+		final int month = (int) data[5];
+		final int day = (int) data[6];
+		final int hours = (int) data[7];
+		final int min = (int) data[8];
+		final int sec = (int) data[9];
+
+		String dateString = year + "/" + month + "/" + day + "/" + hours + "/" + min + "/" + sec;
+		try {
+			 dataTime = new SimpleDateFormat("yyyy/MM/dd/HH/mm/ss").parse(dateString);
+		} catch (ParseException e) {
+			Log.d("Weight", "Unable to parse date foramt: " + e.getMessage());
+		}
+
+		return dataTime;
 	}
 
 	public float weight()
