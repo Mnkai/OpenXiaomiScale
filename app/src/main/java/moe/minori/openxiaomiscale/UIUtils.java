@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+
 import moe.minori.openxiaomiscale.activity.MainActivity;
 import moe.minori.openxiaomiscale.objects.BMI;
 import moe.minori.openxiaomiscale.objects.Weight;
@@ -25,6 +27,7 @@ public class UIUtils
 			{
 				TextView weightTextView = (TextView) activity.findViewById(R.id.scaleWeightText);
 				TextView measureUnitTextView = (TextView) activity.findViewById(R.id.measurementUnitText);
+				TextView weightDateTextView = (TextView) activity.findViewById(R.id.scaleWeightDate);
 				TextView stabilizedTextView = (TextView) activity.findViewById(R.id.scaleStabilizationText);
 				TextView unloadWeightTextView = (TextView) activity.findViewById(R.id.unloadWeightText);
 
@@ -39,6 +42,11 @@ public class UIUtils
 					measureUnitTextView.setText(R.string.measurementUnitLbsString);
 				else if ( weight.getMeasureSystem() == Weight.KG )
 					measureUnitTextView.setText(R.string.measurementUnitKgString);
+
+				if ( weight.isStabilized() )
+					weightDateTextView.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(weight.getDate()));
+				else
+					weightDateTextView.setText("");
 
 				if ( weight.isStabilized() )
 					stabilizedTextView.setText(R.string.stabilizedString);

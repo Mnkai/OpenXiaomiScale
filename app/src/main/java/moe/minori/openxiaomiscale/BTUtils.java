@@ -226,6 +226,7 @@ public class BTUtils
 				final Weight weight = new Weight (characteristic.getValue());
 
 				Log.d("GattCallback", "Weight data: " + weight.weight());
+				Log.d("GattCallback", "Weight date: " + weight.getDate());
 				Log.d("GattCallback", "IsStabilized: " + weight.isStabilized());
 				Log.d("GattCallback", "IsWeightRemoved: " + weight.isWeightRemoved());
 
