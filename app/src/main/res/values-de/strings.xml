@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">OpenXiaomiScale</string>
+    <string name="advancedCategoryTitleString">Erweiterte Optionen (In der Regel brauchen Sie hier nichts ändern)</string>
+    <string name="bmiExtremelyobeseString">starke Adipositas</string>
+    <string name="bmiMasterSummaryString">Berechnet den BMI anhand Ihrer u.a. persönlichen Informationen</string>
+    <string name="bmiMasterTitleString">BMI</string>
+    <string name="bmiNormalweightString">Normalgewicht</string>
+    <string name="bmiObeseString">Adipositas</string>
+    <string name="bmiUnderweightString">Untergewicht</string>
+    <string name="bmiOverweightString">Übergewicht</string>
+    <string name="bugReportSummaryString">Klick hier um den Webbrowser zu starten</string>
+    <string name="bugReportTitleString">Bug Report und Sourcecode</string>
+    <string name="heightSummaryString">Aktuelle Körpergröße (in Zentimeter oder Fuß)</string>
+    <string name="heightTitleString">Körpergröße</string>
+    <string name="historyMenuString">Historie</string>
+    <string name="imperialUnitSummaryString">Zentimeter oder Fuß für die Körpergröße</string>
+    <string name="imperialUnitTitleString">Angloamerikanischen Maßsystem</string>
+    <string name="informationCategoryTitleString">Information</string>
+    <string name="licenseTitleString">Lizenz</string>
+    <string name="maximumScanDurationSummaryString">Konfiguriert die maximale Scandauer</string>
+    <string name="maximumScanDurationTitleString">Maximale Scandauer</string>
+    <string name="measurementUnitPlaceholderString">(Einheit)</string>
+    <string name="permissionRequiredMessageString">Ab Android M, ist es erforderlich die Berechtigung auf den Ort zu erhalten, um BLE im Hintergrund den Zugriff zu ermöglichen</string>
+    <string name="permissionRequiredString">Zugriffsberechtigung erforderlich</string>
+    <string name="personalInformationCategoryTitleString">Persönliche Informationen</string>
+    <string name="scaleDisconnectedString">(Verbindung unterbrochen)</string>
+    <string name="scaleFoundStatusString">Waage gefunden, fahren Sie fort.</string>
+    <string name="scaleNameLableString">Waage:</string>
+    <string name="scaleNotFoundStatusString">Konnte Waage nicht finden. Bitte überprüfen Sie die Batterie und den Empfang und starten Sie erneut</string>
+    <string name="scaleNotFoundString">(Waage nicht gefunden)</string>
+    <string name="scaleSearchingStatusString">Wenn nicht gefunden, steigen Sie bitte auf die Waage.</string>
+    <string name="scaleSearchingString">(Suche...)</string>
+    <string name="scanStartButtonString">Starte scan</string>
+    <string name="settingTitleString">Einstellungen</string>
+    <string name="shareButtonString">Teile</string>
+    <string name="stabilizedString">Wert ist stabilisiert</string>
+    <string name="stringDisconnectedStatusString">Verbindung unterbrochen aufgrund der Reichweite, Standby etc.</string>
+    <string name="weightRemovedString">Gewicht entfernt</string>
+    <string name="measurementUnitCattyString">jin</string>
+    <string name="measurementUnitLbsString">lbs</string>
+    <string name="measurementUnitKgString">kg</string>
+</resources>
